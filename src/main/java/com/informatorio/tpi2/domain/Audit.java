@@ -1,10 +1,21 @@
 package com.informatorio.tpi2.domain;
 
+import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
-public abstract class Audit {
+@MappedSuperclass // clase base para todas las entidades(no crear una tabla para esta clase)
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class Audit {
     private LocalDate createAt;
-    private User createdBy;
+    private String createdBy;
     private LocalDate updatedAt;
-    private User updatedBy;
+    private String updatedBy;
 }
