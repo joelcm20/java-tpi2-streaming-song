@@ -22,6 +22,9 @@ public class PlayList extends Audit {
     @GenericGenerator(name = "UUID")
     private UUID id;
 
+    @Column(nullable = false)
+    private String name;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 

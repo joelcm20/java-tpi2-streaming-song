@@ -25,6 +25,6 @@ public class Genre {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "genres")
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.MERGE)
     private List<Song> songs = new ArrayList<>();
 }

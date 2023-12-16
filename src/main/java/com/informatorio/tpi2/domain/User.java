@@ -27,9 +27,9 @@ public class User extends Audit {
     private String name;
 
     @Column(nullable = false)
-    private String userName;
+    private String username;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private List<PlayList> playLists = new ArrayList<>();
 }
