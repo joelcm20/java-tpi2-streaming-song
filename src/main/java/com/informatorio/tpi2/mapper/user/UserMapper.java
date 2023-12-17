@@ -11,7 +11,7 @@ import java.util.List;
 
 @AllArgsConstructor
 public class UserMapper {
-    private PlayListService playListService;
+    private static PlayListService playListService;
 
     public static UserDto mapToUserDto(User user) {
         UserDto userDto = new UserDto();
@@ -31,11 +31,13 @@ public class UserMapper {
         return userDtos;
     }
 
-    public User mapToUser(UserDto userDto) {
+    public static User mapToUser(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
-        user.setPlayLists(playListService.findByIds(userDto.getPlayLists()));
+        if (!userDto.getPlayLists().isEmpty()) {
+            user.setPlayLists(playListService.findByIds(userDto.getPlayLists()));
+        }
         return user;
     }
 }
