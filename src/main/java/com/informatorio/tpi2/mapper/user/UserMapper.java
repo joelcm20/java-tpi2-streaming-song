@@ -15,6 +15,7 @@ public class UserMapper {
 
     public static UserDto mapToUserDto(User user) {
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setUsername(user.getUsername());
         for (PlayList pl : user.getPlayLists()) {
