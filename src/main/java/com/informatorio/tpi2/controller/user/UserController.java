@@ -29,6 +29,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(new GetUsersResponseDto(ConstantUtils.STATUS_200, users));
     }
 
+
+
     @GetMapping("{username}")
     public ResponseEntity<GetUserResponseDto> getUserByUsername(@PathVariable(name = "username") String username) {
         UserDto user = UserMapper.mapToUserDto(userService.findByUsername(username));

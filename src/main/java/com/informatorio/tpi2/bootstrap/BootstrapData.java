@@ -38,9 +38,11 @@ public class BootstrapData implements CommandLineRunner {
     }
 
     public void loadArtists() {
-        Artist artist = new Artist();
-        artist.setName("Alan Walker");
-        artistRepository.save(artist);
+        Artist artist1 = new Artist();
+        Artist artist2 = new Artist();
+        artist1.setName("Alan");
+        artist2.setName("Walker");
+        artistRepository.saveAll(List.of(artist1, artist2));
     }
 
     public void loadUsers() {
@@ -62,14 +64,14 @@ public class BootstrapData implements CommandLineRunner {
         faded.setRanking(10);
         faded.setDuration(232);
         faded.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
-        faded.setArtists(List.of(artistService.findByName("Alan Walker")));
+        faded.setArtists(List.of(artistService.findByName("Alan")));
 
         darkside.setName("darkside");
         darkside.setAlbum("popular");
         darkside.setRanking(9);
         darkside.setDuration(61);
         darkside.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
-        darkside.setArtists(List.of(artistService.findByName("Alan Walker")));
+        darkside.setArtists(List.of(artistService.findByName("Walker")));
 
         songRepository.saveAll(List.of(faded, darkside));
     }

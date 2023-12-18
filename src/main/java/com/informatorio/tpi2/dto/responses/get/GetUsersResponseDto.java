@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class GetUsersResponseDto {
-    private String StatusCode;
+    private String statusCode;
     private List<UserDto> users;
 }

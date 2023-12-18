@@ -1,11 +1,14 @@
 package com.informatorio.tpi2.service.artist;
 
 import com.informatorio.tpi2.domain.Artist;
+import com.informatorio.tpi2.exception.NotFoundException;
 import com.informatorio.tpi2.repository.artist.ArtistRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -20,5 +23,14 @@ public class ArtistService implements IArtistService {
     @Override
     public List<Artist> findAll() {
         return artistRepository.findAll();
+    }
+
+    @Override
+    public List<Artist> findByIds(List<UUID> ids) {
+        List<Artist> artists = new ArrayList<>();
+        for (UUID id : ids) {
+            artists.add(artistRepository.findById(id).orElseThrow(() -> new NotFoundException("Artista", "id", id.toString())));
+        }
+        return artists;
     }
 }
