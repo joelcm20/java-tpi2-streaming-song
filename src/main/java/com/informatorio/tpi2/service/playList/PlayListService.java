@@ -18,7 +18,7 @@ public class PlayListService implements IPlayListService {
     public List<PlayList> findByIds(List<UUID> ids) {
         List<PlayList> playLists = new ArrayList<>();
         for (UUID id : ids) {
-            playLists.add(playListRepository.findById(id).orElseThrow(()-> new RuntimeException("play list not found")));
+            playLists.add(playListRepository.findById(id).orElseThrow(() -> new RuntimeException("play list not found")));
         }
         return playLists;
     }
@@ -26,5 +26,15 @@ public class PlayListService implements IPlayListService {
     @Override
     public PlayList findById(UUID id) {
         return playListRepository.findById(id).orElseThrow(() -> new RuntimeException("PlayList not found"));
+    }
+
+    @Override
+    public List<PlayList> getPublicPlayListsByName(String name) {
+        return playListRepository.getPublicPlayListsByNameQuery(name);
+    }
+
+    @Override
+    public List<PlayList> findAll() {
+        return playListRepository.findAll();
     }
 }

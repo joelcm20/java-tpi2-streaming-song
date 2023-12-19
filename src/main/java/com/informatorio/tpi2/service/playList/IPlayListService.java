@@ -9,4 +9,8 @@ public interface IPlayListService {
     List<PlayList> findByIds(List<UUID> ids);
 
     PlayList findById(UUID id);
+
+    List<PlayList> getPublicPlayListsByName(String name);
+
+    List<PlayList> findAll();
 }

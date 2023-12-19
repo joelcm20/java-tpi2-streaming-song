@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Data
 public class PlayListDto {
+    private UUID id;
     private String name;
     private UUID user;
     private List<UUID> songs = new ArrayList<>();

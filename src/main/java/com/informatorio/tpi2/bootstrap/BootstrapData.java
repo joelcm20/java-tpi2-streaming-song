@@ -124,18 +124,33 @@ public class BootstrapData implements CommandLineRunner {
 
     public void loadPlayLists() {
         User user1 = userService.findByUsername("joelcm20");
-        PlayList playList = new PlayList();
-        playList.setName("play list 1");
-        playList.setLoop(Boolean.TRUE);
-        playList.setRandom(Boolean.TRUE);
-        playList.setIsPublic(Boolean.FALSE);
-        playList.setCreateAt(LocalDate.now());
-        playList.setUpdatedAt(LocalDate.now());
-        playList.setCreatedBy("joelcm");
-        playList.setUpdatedBy("joelcm");
-        playList.setUser(user1);
-        playList.setSongs(songService.findAll());
-        user1.getPlayLists().add(playList);
+        PlayList playList1 = new PlayList();
+        PlayList playList2 = new PlayList();
+
+        playList1.setName("play list 1");
+        playList1.setLoop(Boolean.TRUE);
+        playList1.setRandom(Boolean.TRUE);
+        playList1.setIsPublic(Boolean.TRUE);
+        playList1.setCreateAt(LocalDate.now());
+        playList1.setUpdatedAt(LocalDate.now());
+        playList1.setCreatedBy("joelcm");
+        playList1.setUpdatedBy("joelcm");
+        playList1.setUser(user1);
+        playList1.setSongs(songService.findAll());
+        user1.getPlayLists().add(playList1);
+
+        playList2.setName("play list 2");
+        playList2.setLoop(Boolean.FALSE);
+        playList2.setRandom(Boolean.FALSE);
+        playList2.setIsPublic(Boolean.TRUE);
+        playList2.setCreateAt(LocalDate.now());
+        playList2.setUpdatedAt(LocalDate.now());
+        playList2.setCreatedBy("joelcm");
+        playList2.setUpdatedBy("joelcm");
+        playList2.setUser(user1);
+        playList2.setSongs(List.of(songService.findByName("darkside"), songService.findByName("demons")));
+        user1.getPlayLists().add(playList2);
+
         userRepository.save(user1);
     }
 }
