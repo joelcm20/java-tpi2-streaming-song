@@ -40,9 +40,11 @@ public class BootstrapData implements CommandLineRunner {
     public void loadArtists() {
         Artist artist1 = new Artist();
         Artist artist2 = new Artist();
+        Artist artist3 = new Artist();
         artist1.setName("Alan");
         artist2.setName("Walker");
-        artistRepository.saveAll(List.of(artist1, artist2));
+        artist3.setName("Imagine Dragons");
+        artistRepository.saveAll(List.of(artist1, artist2, artist3));
     }
 
     public void loadUsers() {
@@ -58,13 +60,22 @@ public class BootstrapData implements CommandLineRunner {
     public void loadSongs() {
         Song faded = new Song();
         Song darkside = new Song();
+        Song demons = new Song();
+        Song happier = new Song();
 
         faded.setName("Faded");
-        faded.setAlbum("popular");
+        faded.setAlbum("Different World");
         faded.setRanking(10);
         faded.setDuration(232);
         faded.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
         faded.setArtists(List.of(artistService.findByName("Alan")));
+
+        darkside.setName("darkside");
+        darkside.setAlbum("Walkerworld");
+        darkside.setRanking(9);
+        darkside.setDuration(61);
+        darkside.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
+        darkside.setArtists(List.of(artistService.findByName("Walker")));
 
         darkside.setName("darkside");
         darkside.setAlbum("popular");
@@ -73,15 +84,39 @@ public class BootstrapData implements CommandLineRunner {
         darkside.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
         darkside.setArtists(List.of(artistService.findByName("Walker")));
 
-        songRepository.saveAll(List.of(faded, darkside));
+        demons.setName("demons");
+        demons.setAlbum("Night Visions");
+        demons.setRanking(25);
+        demons.setDuration(177);
+        demons.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
+        demons.setArtists(List.of(artistService.findByName("Imagine Dragons")));
+
+        happier.setName("happier");
+        happier.setAlbum("Happier");
+        happier.setRanking(13);
+        happier.setDuration(214);
+        happier.setGenres(List.of(genreService.findByName("dance pop"), genreService.findByName("R&B/Soul")));
+        happier.setArtists(List.of(artistService.findByName("Imagine Dragons")));
+
+        songRepository.saveAll(List.of(faded, darkside, demons));
     }
 
     public void loadGenres() {
-        Genre popGenre = new Genre();
-        Genre electroGenre = new Genre();
-        popGenre.setName("pop");
-        electroGenre.setName("electro");
-        genreRepository.saveAll(List.of(popGenre, electroGenre));
+        Genre pop = new Genre();
+        Genre electro = new Genre();
+        Genre rockAlternativo = new Genre();
+        Genre popRock = new Genre();
+        Genre electroPop = new Genre();
+        Genre dancePop = new Genre();
+        Genre RyB_Soul = new Genre();
+        pop.setName("pop");
+        electro.setName("electro");
+        rockAlternativo.setName("rock alternativo");
+        popRock.setName("pop rock");
+        electroPop.setName("electro pop");
+        dancePop.setName("dance pop");
+        RyB_Soul.setName("RyB_Soul");
+        genreRepository.saveAll(List.of(pop, electro, rockAlternativo, popRock, electroPop, dancePop, RyB_Soul));
     }
 
     public void loadPlayLists() {
