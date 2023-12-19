@@ -33,4 +33,9 @@ public class ArtistService implements IArtistService {
         }
         return artists;
     }
+
+    @Override
+    public Artist findById(UUID id) {
+        return artistRepository.findById(id).orElseThrow(() -> new NotFoundException("Artist", "id", id.toString()));
+    }
 }

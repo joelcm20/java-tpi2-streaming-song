@@ -29,6 +29,7 @@ public class SongController {
     ) {
         List<SongDto> songs;
         if (Objects.isNull(name) && Objects.isNull(genre) && Objects.isNull(album) && !Objects.isNull(artist)) {
+            // si todos los filtros son nulos excepto artist
             songs = SongMapper.mapToSongDto(songService.findByArtistOrderByRankingAscQuery(artist));
             return ResponseEntity.status(HttpStatus.OK).body(new GetSongsResponseDto(ConstantUtils.STATUS_200, songs));
         }

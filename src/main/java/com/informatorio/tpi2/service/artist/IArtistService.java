@@ -11,4 +11,6 @@ public interface IArtistService {
     List<Artist> findAll();
 
     List<Artist> findByIds(List<UUID> ids);
+
+    Artist findById(UUID id);
 }
