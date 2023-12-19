@@ -8,9 +8,11 @@ import com.informatorio.tpi2.service.song.SongService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @AllArgsConstructor
@@ -25,7 +27,12 @@ public class SongController {
             @RequestParam(name = "artist", required = false) String artist,
             @RequestParam(name = "album", required = false) String album
     ) {
-        List<SongDto> songs = SongMapper.mapToSongDto(songService.findByFilterQuery(name, genre, artist, album));
+        List<SongDto> songs;
+        if (Objects.isNull(name) && Objects.isNull(genre) && Objects.isNull(album) && !Objects.isNull(artist)) {
+            songs = SongMapper.mapToSongDto(songService.findByArtistOrderByRankingAscQuery(artist));
+            return ResponseEntity.status(HttpStatus.OK).body(new GetSongsResponseDto(ConstantUtils.STATUS_200, songs));
+        }
+        songs = SongMapper.mapToSongDto(songService.findByFilterQuery(name, genre, artist, album));
         return ResponseEntity.status(HttpStatus.OK).body(new GetSongsResponseDto(ConstantUtils.STATUS_200, songs));
     }
 }

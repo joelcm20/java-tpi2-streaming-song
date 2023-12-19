@@ -38,4 +38,9 @@ public class SongService implements ISongService {
     public List<Song> findByFilterQuery(String name, String genre, String artist, String album) {
         return songRepository.findByFilterQuery(name, genre, artist, album);
     }
+
+    @Override
+    public List<Song> findByArtistOrderByRankingAscQuery(String artist) {
+        return songRepository.findByArtistOrderByRankingAscQuery(artist);
+    }
 }

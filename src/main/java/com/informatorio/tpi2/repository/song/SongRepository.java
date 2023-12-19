@@ -24,4 +24,7 @@ public interface SongRepository extends JpaRepository<Song, UUID> {
             @Param("artist") String artist,
             @Param("album") String album
     );
+
+    @Query("SELECT s FROM Song s INNER JOIN s.artists a WHERE UPPER(a.name)=UPPER(:artist) ORDER BY s.ranking ASC")
+    List<Song> findByArtistOrderByRankingAscQuery(@Param("artist") String artist);
 }

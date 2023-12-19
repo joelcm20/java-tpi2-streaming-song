@@ -13,4 +13,6 @@ public interface ISongService {
     List<Song> findByIds(List<UUID> ids);
 
     List<Song> findByFilterQuery(String name, String genre, String artist, String album);
+
+    List<Song> findByArtistOrderByRankingAscQuery(String artist);
 }

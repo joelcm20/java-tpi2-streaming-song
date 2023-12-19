@@ -41,10 +41,12 @@ public class BootstrapData implements CommandLineRunner {
         Artist artist1 = new Artist();
         Artist artist2 = new Artist();
         Artist artist3 = new Artist();
-        artist1.setName("Alan");
-        artist2.setName("Walker");
-        artist3.setName("Imagine Dragons");
-        artistRepository.saveAll(List.of(artist1, artist2, artist3));
+        Artist artist4 = new Artist();
+        artist1.setName("Alan Walker");
+        artist2.setName("Imagine Dragons");
+        artist3.setName("Marshmello");
+        artist4.setName("Bastille");
+        artistRepository.saveAll(List.of(artist1, artist2, artist3, artist4));
     }
 
     public void loadUsers() {
@@ -62,43 +64,44 @@ public class BootstrapData implements CommandLineRunner {
         Song darkside = new Song();
         Song demons = new Song();
         Song happier = new Song();
+        Song natural = new Song();
 
         faded.setName("Faded");
         faded.setAlbum("Different World");
         faded.setRanking(10);
         faded.setDuration(232);
         faded.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
-        faded.setArtists(List.of(artistService.findByName("Alan")));
+        faded.setArtists(List.of(artistService.findByName("Alan Walker")));
 
         darkside.setName("darkside");
         darkside.setAlbum("Walkerworld");
         darkside.setRanking(9);
         darkside.setDuration(61);
         darkside.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
-        darkside.setArtists(List.of(artistService.findByName("Walker")));
-
-        darkside.setName("darkside");
-        darkside.setAlbum("popular");
-        darkside.setRanking(9);
-        darkside.setDuration(61);
-        darkside.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
-        darkside.setArtists(List.of(artistService.findByName("Walker")));
+        darkside.setArtists(List.of(artistService.findByName("Alan Walker")));
 
         demons.setName("demons");
         demons.setAlbum("Night Visions");
         demons.setRanking(25);
         demons.setDuration(177);
-        demons.setGenres(List.of(genreService.findByName("pop"), genreService.findByName("electro")));
+        demons.setGenres(List.of(genreService.findByName("pop rock"), genreService.findByName("RyB_Soul")));
         demons.setArtists(List.of(artistService.findByName("Imagine Dragons")));
 
         happier.setName("happier");
         happier.setAlbum("Happier");
         happier.setRanking(13);
         happier.setDuration(214);
-        happier.setGenres(List.of(genreService.findByName("dance pop"), genreService.findByName("R&B/Soul")));
-        happier.setArtists(List.of(artistService.findByName("Imagine Dragons")));
+        happier.setGenres(List.of(genreService.findByName("dance pop"), genreService.findByName("RyB_Soul")));
+        happier.setArtists(List.of(artistService.findByName("Marshmello"), artistService.findByName("Bastille")));
 
-        songRepository.saveAll(List.of(faded, darkside, demons));
+        natural.setName("natural");
+        natural.setAlbum("Origins(Deluxe)");
+        natural.setRanking(11);
+        natural.setDuration(189);
+        natural.setGenres(List.of(genreService.findByName("electro pop"), genreService.findByName("rock alternativo")));
+        natural.setArtists(List.of(artistService.findByName("Imagine Dragons")));
+
+        songRepository.saveAll(List.of(faded, darkside, demons, happier, natural));
     }
 
     public void loadGenres() {
