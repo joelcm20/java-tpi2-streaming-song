@@ -14,10 +14,10 @@ public interface SongRepository extends JpaRepository<Song, UUID> {
     Song findByName(String name);
 
     @Query("SELECT s FROM Song s INNER JOIN s.genres g INNER JOIN s.artists a WHERE " +
-            "(:name IS NULL OR s.name=:name) AND " +
-            "(:genre IS NULL OR g.name=:genre) AND " +
-            "(:artist IS NULL OR a.name=:artist) AND " +
-            "(:album IS NULL OR s.album=:album)")
+            "(:name IS NULL OR UPPER(s.name)=UPPER(:name)) AND " +
+            "(:genre IS NULL OR UPPER(g.name)=UPPER(:genre)) AND " +
+            "(:artist IS NULL OR UPPER(a.name)=UPPER(:artist)) AND " +
+            "(:album IS NULL OR UPPER(s.album)=UPPER(:album))")
     List<Song> findByFilterQuery(
             @Param("name") String name,
             @Param("genre") String genre,
