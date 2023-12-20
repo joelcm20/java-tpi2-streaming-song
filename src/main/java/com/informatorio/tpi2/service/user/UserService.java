@@ -2,8 +2,11 @@ package com.informatorio.tpi2.service.user;
 
 import com.informatorio.tpi2.domain.User;
 import com.informatorio.tpi2.dto.user.UserDto;
+import com.informatorio.tpi2.dto.user.UserInfoDto;
 import com.informatorio.tpi2.exception.NotFoundException;
 import com.informatorio.tpi2.exception.UserAlreadyExistsException;
+import com.informatorio.tpi2.mapper.PlayList.PlayListInfoMapper;
+import com.informatorio.tpi2.mapper.user.UserInfoMapper;
 import com.informatorio.tpi2.mapper.user.UserMapper;
 import com.informatorio.tpi2.repository.user.UserRepository;
 import com.informatorio.tpi2.service.playList.PlayListService;
