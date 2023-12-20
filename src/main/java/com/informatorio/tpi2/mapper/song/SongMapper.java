@@ -13,9 +13,6 @@ import java.util.List;
 
 @AllArgsConstructor
 public class SongMapper {
-    private static GenreService genreService;
-    private static ArtistService artistService;
-
     public static SongDto mapToSongDto(Song song) {
         SongDto songDto = new SongDto();
         songDto.setId(song.getId());
@@ -47,12 +44,6 @@ public class SongMapper {
         song.setAlbum(songDto.getAlbum());
         song.setDuration(songDto.getDuration());
         song.setRanking(songDto.getRanking());
-        if (!songDto.getGenres().isEmpty()) {
-            song.setGenres(genreService.findByIds(songDto.getGenres()));
-        }
-        if (!songDto.getArtists().isEmpty()) {
-            song.setArtists(artistService.findByIds(songDto.getArtists()));
-        }
         return song;
     }
 }

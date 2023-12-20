@@ -12,9 +12,6 @@ import java.util.List;
 
 @AllArgsConstructor
 public class PlayListMapper {
-    private static UserService userService;
-    private static SongService songService;
-
     public static PlayListDto mapToPlayListDto(PlayList playList) {
         PlayListDto playListDto = new PlayListDto();
         playListDto.setId(playList.getId());
@@ -43,8 +40,6 @@ public class PlayListMapper {
         playList.setLoop(playListDto.getLoop());
         playList.setRandom(playListDto.getRandom());
         playList.setIsPublic(playListDto.getIsPublic());
-        playList.setUser(userService.findById(playListDto.getUser()));
-        playList.setSongs(songService.findByIds(playListDto.getSongs()));
         return playList;
     }
 }
