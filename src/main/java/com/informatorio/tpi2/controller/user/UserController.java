@@ -30,7 +30,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("{username}")
     public ResponseEntity<GetUserResponseDto> getUserByUsername(@PathVariable(name = "username") String username) {
         UserDto user = UserMapper.mapToUserDto(userService.findByUsername(username));
@@ -39,8 +38,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<CreateUserResponseDto> createUser(@RequestBody UserDto userBody) {
-        User newUser = userRepository.save(UserMapper.mapToUser(userBody));
-        UserDto userDto = UserMapper.mapToUserDto(newUser);
+        User user = userService.createUser(userBody);
+        UserDto userDto = UserMapper.mapToUserDto(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(new CreateUserResponseDto(ConstantUtils.STATUS_201, userDto));
     }
 }

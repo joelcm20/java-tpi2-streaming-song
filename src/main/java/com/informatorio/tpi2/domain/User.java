@@ -26,7 +26,7 @@ public class User extends Audit {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

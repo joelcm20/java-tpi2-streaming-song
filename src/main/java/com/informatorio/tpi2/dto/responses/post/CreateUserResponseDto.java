@@ -8,5 +8,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class CreateUserResponseDto {
     private String StatusCode;
-    private UserDto userDto;
+    private UserDto user;
 }
