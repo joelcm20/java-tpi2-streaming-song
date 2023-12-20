@@ -2,6 +2,7 @@ package com.informatorio.tpi2.exception;
 
 import com.informatorio.tpi2.constants.ConstantUtils;
 import com.informatorio.tpi2.dto.error.ErrorResponseDto;
+import org.apache.coyote.BadRequestException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,25 @@ public class GlobalExceptionHandler {
         errorResponse.setHttpStatus(HttpStatus.CONFLICT);
         errorResponse.setErrorTime(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserRequiredException.class)
+    public ResponseEntity<ErrorResponseDto> handleUserRequiredException(UserRequiredException exception, WebRequest webRequest) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto();
+        errorResponse.setApiPath(webRequest.getDescription(false));
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
+        errorResponse.setErrorTime(LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponseDto> handleUserRequiredException(BadRequestException exception, WebRequest webRequest) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto();
+        errorResponse.setApiPath(webRequest.getDescription(false));
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
+        errorResponse.setErrorTime(LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }

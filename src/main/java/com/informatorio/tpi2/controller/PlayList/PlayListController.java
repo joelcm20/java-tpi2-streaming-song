@@ -7,7 +7,9 @@ import com.informatorio.tpi2.dto.playList.PlayListDto;
 import com.informatorio.tpi2.dto.responses.get.GetPlayListsResponseDto;
 import com.informatorio.tpi2.dto.responses.get.GetSongsResponseDto;
 import com.informatorio.tpi2.dto.responses.get.GetUserPlayListsResponseDto;
+import com.informatorio.tpi2.dto.responses.post.CreatePlayListResponseDto;
 import com.informatorio.tpi2.dto.song.SongDto;
+import com.informatorio.tpi2.exception.UserRequiredException;
 import com.informatorio.tpi2.mapper.PlayList.PlayListMapper;
 import com.informatorio.tpi2.mapper.song.SongMapper;
 import com.informatorio.tpi2.service.playList.PlayListService;
@@ -51,5 +53,12 @@ public class PlayListController {
         List<Song> songs = playListService.findSongsPlayListById(id);
         List<SongDto> songDtos = SongMapper.mapToSongDto(songs);
         return ResponseEntity.status(HttpStatus.OK).body(new GetSongsResponseDto(ConstantUtils.STATUS_200, songDtos));
+    }
+
+    @PostMapping
+    public ResponseEntity<CreatePlayListResponseDto> createPlayList(@RequestBody PlayListDto body) throws UserRequiredException {
+        PlayList playList = playListService.createPlayLists(body);
+        PlayListDto playListDto = PlayListMapper.mapToPlayListDto(playList);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CreatePlayListResponseDto(ConstantUtils.STATUS_201, playListDto));
     }
 }
