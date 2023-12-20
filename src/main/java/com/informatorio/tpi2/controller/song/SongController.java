@@ -21,12 +21,7 @@ public class SongController {
     private SongService songService;
 
     @GetMapping
-    public ResponseEntity<GetSongsResponseDto> getSongs(
-            @RequestParam(name = "name", required = false) String name,
-            @RequestParam(name = "genre", required = false) String genre,
-            @RequestParam(name = "artist", required = false) String artist,
-            @RequestParam(name = "album", required = false) String album
-    ) {
+    public ResponseEntity<GetSongsResponseDto> getSongs(@RequestParam(name = "name", required = false) String name, @RequestParam(name = "genre", required = false) String genre, @RequestParam(name = "artist", required = false) String artist, @RequestParam(name = "album", required = false) String album) {
         List<SongDto> songs;
         if (Objects.isNull(name) && Objects.isNull(genre) && Objects.isNull(album) && !Objects.isNull(artist)) {
             // si todos los filtros son nulos excepto artist

@@ -1,6 +1,7 @@
 package com.informatorio.tpi2.service.playList;
 
 import com.informatorio.tpi2.domain.PlayList;
+import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.repository.playList.PlayListRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class PlayListService implements IPlayListService {
     @Override
     public List<PlayList> findUserPlayListsByIdOrderByCreated(UUID id) {
         return playListRepository.getUserPlayListsByIdOrderByCreated(id);
+    }
+
+    @Override
+    public List<Song> findSongsPlayListById(UUID id) {
+        return playListRepository.getSongsPlayListById(id);
     }
 }

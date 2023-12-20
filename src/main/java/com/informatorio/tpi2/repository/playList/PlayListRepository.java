@@ -1,6 +1,7 @@
 package com.informatorio.tpi2.repository.playList;
 
 import com.informatorio.tpi2.domain.PlayList;
+import com.informatorio.tpi2.domain.Song;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,7 @@ public interface PlayListRepository extends JpaRepository<PlayList, UUID> {
 
     @Query("SELECT p FROM User u INNER JOIN PlayList p ON u.id=p.user.id WHERE u.id=:id ORDER BY p.createdAt DESC")
     List<PlayList> getUserPlayListsByIdOrderByCreated(@Param("id") UUID id);
+
+    @Query("SELECT p.songs FROM PlayList p WHERE p.id=:id")
+    List<Song> getSongsPlayListById(@Param("id") UUID id);
 }
