@@ -13,4 +13,6 @@ public interface IPlayListService {
     List<PlayList> getPublicPlayListsByName(String name);
 
     List<PlayList> findAll();
+
+    List<PlayList> findUserPlayListsByIdOrderByCreated(UUID id);
 }

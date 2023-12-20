@@ -11,4 +11,7 @@ import java.util.UUID;
 public interface PlayListRepository extends JpaRepository<PlayList, UUID> {
     @Query("SELECT p FROM PlayList p WHERE p.isPublic=TRUE AND UPPER(p.name) LIKE UPPER(:name)")
     List<PlayList> getPublicPlayListsByNameQuery(@Param("name") String name);
+
+    @Query("SELECT p FROM User u INNER JOIN PlayList p ON u.id=p.user.id WHERE u.id=:id ORDER BY p.createdAt DESC")
+    List<PlayList> getUserPlayListsByIdOrderByCreated(@Param("id") UUID id);
 }

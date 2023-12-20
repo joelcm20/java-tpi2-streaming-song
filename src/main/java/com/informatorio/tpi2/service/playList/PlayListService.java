@@ -37,4 +37,9 @@ public class PlayListService implements IPlayListService {
     public List<PlayList> findAll() {
         return playListRepository.findAll();
     }
+
+    @Override
+    public List<PlayList> findUserPlayListsByIdOrderByCreated(UUID id) {
+        return playListRepository.getUserPlayListsByIdOrderByCreated(id);
+    }
 }

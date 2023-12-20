@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Audit {
-    private LocalDate createAt;
+    private LocalDate createdAt;
     private String createdBy;
     private LocalDate updatedAt;
     private String updatedBy;

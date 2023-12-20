@@ -53,7 +53,7 @@ public class BootstrapData implements CommandLineRunner {
         User user = new User();
         user.setName("joel");
         user.setUsername("joelcm20");
-        user.setCreateAt(LocalDate.now());
+        user.setCreatedAt(LocalDate.now());
         user.setCreatedBy("joel");
         user.setUpdatedAt(LocalDate.now());
         userRepository.save(user);
@@ -131,7 +131,7 @@ public class BootstrapData implements CommandLineRunner {
         playList1.setLoop(Boolean.TRUE);
         playList1.setRandom(Boolean.TRUE);
         playList1.setIsPublic(Boolean.TRUE);
-        playList1.setCreateAt(LocalDate.now());
+        playList1.setCreatedAt(LocalDate.now());
         playList1.setUpdatedAt(LocalDate.now());
         playList1.setCreatedBy("joelcm");
         playList1.setUpdatedBy("joelcm");
@@ -143,7 +143,7 @@ public class BootstrapData implements CommandLineRunner {
         playList2.setLoop(Boolean.FALSE);
         playList2.setRandom(Boolean.FALSE);
         playList2.setIsPublic(Boolean.TRUE);
-        playList2.setCreateAt(LocalDate.now());
+        playList2.setCreatedAt(LocalDate.now());
         playList2.setUpdatedAt(LocalDate.now());
         playList2.setCreatedBy("joelcm");
         playList2.setUpdatedBy("joelcm");
