@@ -4,6 +4,7 @@ import com.informatorio.tpi2.domain.PlayList;
 import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.dto.playList.PlayListDto;
 import com.informatorio.tpi2.dto.request.AddSongToPlayListRequestDto;
+import com.informatorio.tpi2.dto.request.DeleteSongFromPlayListRequestDto;
 import com.informatorio.tpi2.dto.responses.post.AddSongToPlayListResponseDto;
 import com.informatorio.tpi2.exception.UserRequiredException;
 
@@ -26,4 +27,6 @@ public interface IPlayListService {
     PlayList createPlayLists(PlayListDto playListDto) throws UserRequiredException;
 
     PlayList addSongToPlayList(AddSongToPlayListRequestDto body, UUID idPlayList, UUID idSong);
+
+    void deleteSongFromPlayList(DeleteSongFromPlayListRequestDto body, UUID idPlayList, UUID idSong);
 }

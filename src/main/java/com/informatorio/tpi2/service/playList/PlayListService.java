@@ -5,6 +5,7 @@ import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.domain.User;
 import com.informatorio.tpi2.dto.playList.PlayListDto;
 import com.informatorio.tpi2.dto.request.AddSongToPlayListRequestDto;
+import com.informatorio.tpi2.dto.request.DeleteSongFromPlayListRequestDto;
 import com.informatorio.tpi2.exception.NotFoundException;
 import com.informatorio.tpi2.exception.UnauthorizedException;
 import com.informatorio.tpi2.exception.UserRequiredException;
@@ -80,7 +81,7 @@ public class PlayListService implements IPlayListService {
     @Override
     public PlayList addSongToPlayList(AddSongToPlayListRequestDto body, UUID idPlayList, UUID idSong) {
         PlayList playList = playListRepository.findById(idPlayList).orElseThrow(() -> new NotFoundException("Playlist", "id", idPlayList.toString()));
-        if (!isOwnerOf(playList, body)) {
+        if (!isOwnerOf(playList, body.getUserId())) {
             throw new UnauthorizedException();
         }
         Song song = songService.findById(idSong);
@@ -88,7 +89,17 @@ public class PlayListService implements IPlayListService {
         return playListRepository.save(playList);
     }
 
-    private Boolean isOwnerOf(PlayList playList, AddSongToPlayListRequestDto userRequest) {
-        return playList.getUser().getId().equals(userRequest.getUserId());
+    private Boolean isOwnerOf(PlayList playList, UUID userId) {
+        return playList.getUser().getId().equals(userId);
+    }
+
+    @Override
+    public void deleteSongFromPlayList(DeleteSongFromPlayListRequestDto body, UUID idPlayList, UUID idSong) {
+        PlayList playList = playListRepository.findById(idPlayList).orElseThrow(() -> new NotFoundException("Playlist", "id", idPlayList.toString()));
+        if (!isOwnerOf(playList, body.getUserId())) {
+            throw new UnauthorizedException();
+        }
+        playList.getSongs().removeIf((s) -> s.getId().equals(idSong));
+        playListRepository.save(playList);
     }
 }

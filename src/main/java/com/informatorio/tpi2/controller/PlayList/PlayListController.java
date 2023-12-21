@@ -6,6 +6,7 @@ import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.dto.playList.PlayListDto;
 import com.informatorio.tpi2.dto.playList.PlayListInfoDto;
 import com.informatorio.tpi2.dto.request.AddSongToPlayListRequestDto;
+import com.informatorio.tpi2.dto.request.DeleteSongFromPlayListRequestDto;
 import com.informatorio.tpi2.dto.responses.get.GetPlayListsResponseDto;
 import com.informatorio.tpi2.dto.responses.get.GetSongsResponseDto;
 import com.informatorio.tpi2.dto.responses.get.GetUserPlayListsResponseDto;
@@ -72,4 +73,11 @@ public class PlayListController {
         PlayListInfoDto playListInfoDto = PlayListInfoMapper.mapToPlayListInfoDto(playList);
         return ResponseEntity.status(HttpStatus.CREATED).body(new AddSongToPlayListResponseDto(ConstantUtils.STATUS_201, playListInfoDto));
     }
+
+    @DeleteMapping("/{idPlayList}/delete/{idSong}")
+    public ResponseEntity<?> deleteSongFromPlayList(@RequestBody DeleteSongFromPlayListRequestDto body, @PathVariable("idPlayList") UUID idPlayList, @PathVariable("idSong") UUID idSong) {
+        playListService.deleteSongFromPlayList(body, idPlayList, idSong);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
 }
