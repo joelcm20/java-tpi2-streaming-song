@@ -4,12 +4,16 @@ import com.informatorio.tpi2.constants.ConstantUtils;
 import com.informatorio.tpi2.domain.PlayList;
 import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.dto.playList.PlayListDto;
+import com.informatorio.tpi2.dto.playList.PlayListInfoDto;
+import com.informatorio.tpi2.dto.request.AddSongToPlayListRequestDto;
 import com.informatorio.tpi2.dto.responses.get.GetPlayListsResponseDto;
 import com.informatorio.tpi2.dto.responses.get.GetSongsResponseDto;
 import com.informatorio.tpi2.dto.responses.get.GetUserPlayListsResponseDto;
+import com.informatorio.tpi2.dto.responses.post.AddSongToPlayListResponseDto;
 import com.informatorio.tpi2.dto.responses.post.CreatePlayListResponseDto;
 import com.informatorio.tpi2.dto.song.SongDto;
 import com.informatorio.tpi2.exception.UserRequiredException;
+import com.informatorio.tpi2.mapper.PlayList.PlayListInfoMapper;
 import com.informatorio.tpi2.mapper.PlayList.PlayListMapper;
 import com.informatorio.tpi2.mapper.song.SongMapper;
 import com.informatorio.tpi2.service.playList.PlayListService;
@@ -60,5 +64,12 @@ public class PlayListController {
         PlayList playList = playListService.createPlayLists(body);
         PlayListDto playListDto = PlayListMapper.mapToPlayListDto(playList);
         return ResponseEntity.status(HttpStatus.CREATED).body(new CreatePlayListResponseDto(ConstantUtils.STATUS_201, playListDto));
+    }
+
+    @PostMapping("/{idPlayList}/add/{idSong}")
+    public ResponseEntity<AddSongToPlayListResponseDto> addSongToPlayList(@RequestBody AddSongToPlayListRequestDto body, @PathVariable("idPlayList") UUID idPlayList, @PathVariable("idSong") UUID idSong) {
+        PlayList playList = playListService.addSongToPlayList(body, idPlayList, idSong);
+        PlayListInfoDto playListInfoDto = PlayListInfoMapper.mapToPlayListInfoDto(playList);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AddSongToPlayListResponseDto(ConstantUtils.STATUS_201, playListInfoDto));
     }
 }

@@ -4,6 +4,9 @@ import com.informatorio.tpi2.domain.PlayList;
 import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.domain.User;
 import com.informatorio.tpi2.dto.playList.PlayListDto;
+import com.informatorio.tpi2.dto.request.AddSongToPlayListRequestDto;
+import com.informatorio.tpi2.exception.NotFoundException;
+import com.informatorio.tpi2.exception.UnauthorizedException;
 import com.informatorio.tpi2.exception.UserRequiredException;
 import com.informatorio.tpi2.mapper.PlayList.PlayListMapper;
 import com.informatorio.tpi2.repository.playList.PlayListRepository;
@@ -72,5 +75,20 @@ public class PlayListService implements IPlayListService {
             throw new UserRequiredException();
         }
         return userRepository.findById(id).orElseThrow(() -> new UserRequiredException(id));
+    }
+
+    @Override
+    public PlayList addSongToPlayList(AddSongToPlayListRequestDto body, UUID idPlayList, UUID idSong) {
+        PlayList playList = playListRepository.findById(idPlayList).orElseThrow(() -> new NotFoundException("Playlist", "id", idPlayList.toString()));
+        if (!isOwnerOf(playList, body)) {
+            throw new UnauthorizedException();
+        }
+        Song song = songService.findById(idSong);
+        playList.getSongs().add(song);
+        return playListRepository.save(playList);
+    }
+
+    private Boolean isOwnerOf(PlayList playList, AddSongToPlayListRequestDto userRequest) {
+        return playList.getUser().getId().equals(userRequest.getUserId());
     }
 }

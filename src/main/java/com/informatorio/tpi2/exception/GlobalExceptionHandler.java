@@ -54,4 +54,14 @@ public class GlobalExceptionHandler {
         errorResponse.setErrorTime(LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponseDto> handleUserRequiredException(UnauthorizedException exception, WebRequest webRequest) {
+        ErrorResponseDto errorResponse = new ErrorResponseDto();
+        errorResponse.setApiPath(webRequest.getDescription(false));
+        errorResponse.setErrorMessage(exception.getMessage());
+        errorResponse.setHttpStatus(HttpStatus.UNAUTHORIZED);
+        errorResponse.setErrorTime(LocalDateTime.now());
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
+    }
 }

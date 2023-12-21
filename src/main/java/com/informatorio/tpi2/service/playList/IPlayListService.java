@@ -3,6 +3,8 @@ package com.informatorio.tpi2.service.playList;
 import com.informatorio.tpi2.domain.PlayList;
 import com.informatorio.tpi2.domain.Song;
 import com.informatorio.tpi2.dto.playList.PlayListDto;
+import com.informatorio.tpi2.dto.request.AddSongToPlayListRequestDto;
+import com.informatorio.tpi2.dto.responses.post.AddSongToPlayListResponseDto;
 import com.informatorio.tpi2.exception.UserRequiredException;
 
 import java.util.List;
@@ -22,4 +24,6 @@ public interface IPlayListService {
     List<Song> findSongsPlayListById(UUID id);
 
     PlayList createPlayLists(PlayListDto playListDto) throws UserRequiredException;
+
+    PlayList addSongToPlayList(AddSongToPlayListRequestDto body, UUID idPlayList, UUID idSong);
 }

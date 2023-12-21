@@ -35,6 +35,11 @@ public class SongService implements ISongService {
     }
 
     @Override
+    public Song findById(UUID id) {
+        return songRepository.findById(id).orElseThrow(() -> new NotFoundException("Musica", "id", id.toString()));
+    }
+
+    @Override
     public List<Song> findByFilterQuery(String name, String genre, String artist, String album) {
         return songRepository.findByFilterQuery(name, genre, artist, album);
     }
